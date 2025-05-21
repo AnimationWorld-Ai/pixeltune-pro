@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PixelTune Pro</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <base href="https://animationworld-ai.github.io/pixeltune-pro/" />
 </head>
 <body>
   <div class="editor">
@@ -16,13 +17,13 @@
     <input type="range" id="opacitySlider" min="0" max="100" value="100" />
 
     <label>Brightness:</label>
-    <input type="range" id="brightnessSlider" min="-1" max="1" step="0.1" />
+    <input type="range" id="brightnessSlider" min="-1" max="1" step="0.1" value="0" />
 
     <label>Contrast:</label>
-    <input type="range" id="contrastSlider" min="-1" max="1" step="0.1" />
+    <input type="range" id="contrastSlider" min="-1" max="1" step="0.1" value="0" />
 
     <label>Saturation:</label>
-    <input type="range" id="saturationSlider" min="-1" max="1" step="0.1" />
+    <input type="range" id="saturationSlider" min="-1" max="1" step="0.1" value="0" />
 
     <button onclick="addText()">Add Text</button>
     <button onclick="addWatermark()">Add Watermark</button>
@@ -32,7 +33,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
 
