@@ -2,6 +2,9 @@ const canvas = new fabric.Canvas('canvas');
 let imgInstance;
 
 document.getElementById('imgLoader').addEventListener('change', function (e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
   const reader = new FileReader();
   reader.onload = function (event) {
     fabric.Image.fromURL(event.target.result, function (img) {
@@ -9,9 +12,9 @@ document.getElementById('imgLoader').addEventListener('change', function (e) {
       canvas.clear();
       imgInstance = img;
       canvas.add(img);
-    });
+    }, { crossOrigin: 'anonymous' });
   };
-  reader.readAsDataURL(e.target.files[0]);
+  reader.readAsDataURL(file);
 });
 
 document.getElementById('opacitySlider').addEventListener('input', function () {
@@ -22,11 +25,36 @@ document.getElementById('opacitySlider').addEventListener('input', function () {
   }
 });
 
+document.getElementById('brightnessSlider').addEventListener('input', function () {
+  if (imgInstance) {
+    imgInstance.filters = [new fabric.Image.filters.Brightness({ brightness: parseFloat(this.value) })];
+    imgInstance.applyFilters();
+    canvas.renderAll();
+  }
+});
+
+document.getElementById('contrastSlider').addEventListener('input', function () {
+  if (imgInstance) {
+    imgInstance.filters = [new fabric.Image.filters.Contrast({ contrast: parseFloat(this.value) })];
+    imgInstance.applyFilters();
+    canvas.renderAll();
+  }
+});
+
+document.getElementById('saturationSlider').addEventListener('input', function () {
+  if (imgInstance) {
+    imgInstance.filters = [new fabric.Image.filters.Saturation({ saturation: parseFloat(this.value) })];
+    imgInstance.applyFilters();
+    canvas.renderAll();
+  }
+});
+
 function addText() {
   const text = new fabric.Textbox('Your Text Here', {
     left: 50,
     top: 50,
     fontSize: 20,
+    fill: 'black'
   });
   canvas.add(text);
 }
@@ -36,7 +64,7 @@ function addWatermark() {
     left: 150,
     top: 150,
     fontSize: 16,
-    fill: 'rgba(0,0,0,0.5)',
+    fill: 'rgba(0,0,0,0.5)'
   });
   canvas.add(watermark);
 }
